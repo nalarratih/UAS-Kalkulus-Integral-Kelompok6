@@ -191,7 +191,8 @@
         }
       ]
     },
-    {
+    
+{
       "cell_type": "code",
       "source": [
         "print('=== VERIFIKASI SIMBOLIK (diff dari antiturunan) ===')\n",
@@ -224,3 +225,82 @@
         }
       ]
     },
+
+{
+  "cell_type": "code",
+  "source": [
+    "# Fungsi kecepatan numerik piecewise\n",
+    "def v_num(t_arr):\n",
+    "    \"\"\"Hitung v(t) untuk setiap titik dalam array t_arr.\"\"\"\n",
+    "    v = np.zeros_like(t_arr, dtype=float)\n",
+    "\n",
+    "    m1 = (t_arr >= t0) & (t_arr <= t1)\n",
+    "    v[m1] = 2 * t_arr[m1]\n",
+    "\n",
+    "    m2 = (t_arr > t1) & (t_arr <= t2)\n",
+    "    v[m2] = 50.0\n",
+    "\n",
+    "    m3 = (t_arr > t2) & (t_arr <= t3)\n",
+    "    v[m3] = 50 + (1/25) * (t_arr[m3] - 50)**2\n",
+    "\n",
+    "    m4 = (t_arr > t3) & (t_arr <= t4)\n",
+    "    v[m4] = 75 - 3 * (t_arr[m4] - 75)\n",
+    "\n",
+    "    return v\n",
+    "\n",
+    "def trapz_per_fase(n):\n",
+    "    hasil = {}\n",
+    "    batas = [(t0, t1), (t1, t2), (t2, t3), (t3, t4)]\n",
+    "\n",
+    "    for i, (a, b) in enumerate(batas, start=1):\n",
+    "        tt = np.linspace(a, b, n + 1)\n",
+    "        vv = v_num(tt)\n",
+    "        hasil[f's{i}'] = np.trapezoid(vv, tt)\n",
+    "\n",
+    "    hasil['total'] = sum(hasil[f's{i}'] for i in range(1, 5))\n",
+    "    return hasil\n",
+    "\n",
+    "hasil_n1000 = trapz_per_fase(n=1000)\n",
+    "hasil_n100000 = trapz_per_fase(n=100000)\n",
+    "\n",
+    "print('=' * 60)\n",
+    "print('HASIL NUMERIK — METODE TRAPESIUM')\n",
+    "print('=' * 60)\n",
+    "print(f\"{'':6} {'n=1.000':>14} {'n=100.000':>14}\")\n",
+    "print('-' * 40)\n",
+    "\n",
+    "for i in range(1, 5):\n",
+    "    key = f's{i}'\n",
+    "    print(f'  {key}    {hasil_n1000[key]:>14.6f}   {hasil_n100000[key]:>14.6f}  m')\n",
+    "\n",
+    "print('-' * 40)\n",
+    "print(f\"  Total {hasil_n1000['total']:>14.6f}   {hasil_n100000['total']:>14.6f}  m\")"
+  ],
+  "metadata": {
+    "colab": {
+      "base_uri": "https://localhost:8080/"
+    },
+    "id": "NUMERIK_TRAPESIUM",
+    "outputId": "NUMERIK_OUTPUT"
+  },
+  "execution_count": null,
+  "outputs": [
+    {
+      "output_type": "stream",
+      "name": "stdout",
+      "text": [
+        "============================================================\n",
+        "HASIL NUMERIK — METODE TRAPESIUM\n",
+        "============================================================\n",
+        "              n=1.000      n=100.000\n",
+        "----------------------------------------\n",
+        "  s1        625.000000       625.000000  m\n",
+        "  s2       1250.000000      1250.000000  m\n",
+        "  s3       1458.333437      1458.333333  m\n",
+        "  s4        937.500000       937.500000  m\n",
+        "----------------------------------------\n",
+        "  Total    4270.833437      4270.833333  m\n"
+      ]
+    }
+  ]
+}
