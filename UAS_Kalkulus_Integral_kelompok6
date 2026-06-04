@@ -1,1 +1,146 @@
-
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/nalarratih/UAS-Kalkulus-Integral-Kelompok6/blob/main/UAS_KalkulusIntegral_Kelompok6.ipynb\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "## **Bagian A: Deskripsi Masalah dan Satuan**\n",
+        "Sebuah kendaraan bergerak di jalan tol selama T = 100 detik. Pergerakan dibagi menjadi 4 fase, yaitu:\n",
+        "\n",
+        "- Fase 1 interval waktu (0 ≤ t ≤ 25 s): Akselerasi Linier — v(t) = 2t\n",
+        "- Fase 2 interval waktu (25 < t ≤ 50 s): Konstan — v(t) = 50\n",
+        "- Fase 3 interval waktu (50 < t ≤ 75 s): Akselerasi Kuadratik — v(t) = 50 + (1/25)(t−50)²\n",
+        "- Fase 4 interval waktu  (75 < t ≤ 100 s): Deselerasi Linier — v(t) = 75 − 3(t−75)\n",
+        "\n",
+        "Satuan\n",
+        "- Waktu (t) = detik (s)\n",
+        "- Kecepatan v(t) = meter/detik (m/s)\n",
+        "- Jarak/Akumulasi (s)= meter (m)\n",
+        "\n",
+        "### Tujuan\n",
+        "Untuk menghitung jarak tempuh total dengan 2 pendekatan, yaitu analitik (SymPy) dan numerik (NumPy trapesium), disertai validasi dan visualisasi per fasenya."
+      ],
+      "metadata": {
+        "id": "yuZYn6Miw81b"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "## **Bagian B: Model Matematis**\n",
+        "Fungsi Kecepatan Piecewise v(t)\n",
+        "$$v(t) = \\begin{cases} 2t & 0 \\leq t \\leq 25 \\quad\\text{(Fase 1: Akselerasi Linier)}\\\\ 50 & 25 < t \\leq 50 \\quad\\text{(Fase 2: Konstan)}\\\\ 50 + 0{,}04(t-50)^2 & 50 < t \\leq 75 \\quad\\text{(Fase 3: Akselerasi Kuadratik)}\\\\ 75 - 3(t-75) & 75 < t \\leq 100 \\quad\\text{(Fase 4: Deselerasi Linier)} \\end{cases}$$\n",
+        "\n",
+        "\n",
+        "Integral Tentu per Fase\n",
+        "\n",
+        "$$s_1 = \\int_0^{25} 2t\\,dt$$\n",
+        "\n",
+        "$$ s_2 = \\int_{25}^{50} 50\\,dt$$\n",
+        "\n",
+        "$$s_3 = \\int_{50}^{75}\\left[50+0{,}04(t-50)^2\\right]dt$$\n",
+        "\n",
+        "$$s_4 = \\int_{75}^{100}\\left[75-3(t-75)\\right]dt$$\n",
+        "\n",
+        "$$s_{\\text{total}} = s_1 + s_2 + s_3 + s_4$$"
+      ],
+      "metadata": {
+        "id": "MFNqgGoGw-xo"
+      }
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "uJYqyVTsw2DU"
+      },
+      "outputs": [],
+      "source": [
+        "import sympy as sp\n",
+        "import numpy as np\n",
+        "import matplotlib.pyplot as plt"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "## **Bagian C: Solusi Simbolik (SymPy)**\n"
+      ],
+      "metadata": {
+        "id": "9eQJL6usxF3j"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "sp.init_printing(use_unicode=True)\n",
+        "\n",
+        "# Definisi simbol\n",
+        "t = sp.Symbol('t', real=True)\n",
+        "\n",
+        "# Batas fase\n",
+        "t0, t1, t2, t3, t4 = 0, 25, 50, 75, 100\n",
+        "\n",
+        "# Fungsi simbolik per fase\n",
+        "v1_sym = 2 * t                                    # 0 - 25\n",
+        "v2_sym = sp.Integer(50)                           # 25 - 50\n",
+        "v3_sym = 50 + sp.Rational(1, 25) * (t - 50)**2   # 50 - 75\n",
+        "v4_sym = 75 - 3 * (t - 75)                       # 75 - 100\n",
+        "\n",
+        "print('=' * 55)\n",
+        "print('FUNGSI KECEPATAN SIMBOLIK PER FASE')\n",
+        "print('=' * 55)\n",
+        "\n",
+        "print(f'v1(t) = {v1_sym}      , {t0} <= t <= {t1}')\n",
+        "print(f'v2(t) = {v2_sym}      , {t1} < t <= {t2}')\n",
+        "print(f'v3(t) = {v3_sym}      , {t2} < t <= {t3}')\n",
+        "print(f'v4(t) = {v4_sym}      , {t3} < t <= {t4}')\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "Te4ai-3mxaVp",
+        "outputId": "56b0c28b-49aa-449c-d0a1-2555dad0c9fe"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "=======================================================\n",
+            "FUNGSI KECEPATAN SIMBOLIK PER FASE\n",
+            "=======================================================\n",
+            "v1(t) = 2*t      , 0 <= t <= 25\n",
+            "v2(t) = 50      , 25 < t <= 50\n",
+            "v3(t) = (t - 50)**2/25 + 50      , 50 < t <= 75\n",
+            "v4(t) = 300 - 3*t      , 75 < t <= 100\n"
+          ]
+        }
+      ]
+    },
