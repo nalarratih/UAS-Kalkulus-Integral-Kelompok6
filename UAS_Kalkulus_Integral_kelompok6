@@ -144,3 +144,50 @@
         }
       ]
     },
+{
+      "cell_type": "code",
+      "source": [
+        "# Integral simbolik per fase\n",
+        "s1_sym = sp.integrate(v1_sym, (t, t0, t1))\n",
+        "s2_sym = sp.integrate(v2_sym, (t, t1, t2))\n",
+        "s3_sym = sp.integrate(v3_sym, (t, t2, t3))\n",
+        "s4_sym = sp.integrate(v4_sym, (t, t3, t4))\n",
+        "\n",
+        "s_total_sym = s1_sym + s2_sym + s3_sym + s4_sym\n",
+        "\n",
+        "print('=' * 55)\n",
+        "print('HASIL INTEGRAL SIMBOLIK (JARAK PER FASE)')\n",
+        "print('=' * 55)\n",
+        "print(f'  s1  (Fase 1 — Akselerasi)     = {s1_sym} m')\n",
+        "print(f'  s2  (Fase 2 — Konstan)        = {s2_sym} m')\n",
+        "print(f'  s3  (Fase 3 — Aksel. Kuadrat) = {s3_sym} m')\n",
+        "print(f'  s4  (Fase 4 — Deselerasi)     = {s4_sym} m')\n",
+        "print('-' * 55)\n",
+        "print(f'  s_total (Simbolik)            = {s_total_sym} m')"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "JOd_PpsyF4xc",
+        "outputId": "37a82915-5933-465c-ee00-d247dbf858bf"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "=======================================================\n",
+            "HASIL INTEGRAL SIMBOLIK (JARAK PER FASE)\n",
+            "=======================================================\n",
+            "  s1  (Fase 1 — Akselerasi)     = 625 m\n",
+            "  s2  (Fase 2 — Konstan)        = 1250 m\n",
+            "  s3  (Fase 3 — Aksel. Kuadrat) = 4375/3 m\n",
+            "  s4  (Fase 4 — Deselerasi)     = 1875/2 m\n",
+            "-------------------------------------------------------\n",
+            "  s_total (Simbolik)            = 25625/6 m\n"
+          ]
+        }
+      ]
+    },
