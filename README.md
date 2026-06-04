@@ -9,14 +9,15 @@
 
 ## Anggota Kelompok
 
-| No | Nama | NIM | Peran |
-|----|------|-----|-------|
-| 1 | Elvina Yahya Griselda | 25051130007 | Modeling Lead |
-| 2 | Arlina Dewi Kusumawati | 25051130011 | Numeric & Validation Lead |
-| 3 | Tashfia Eka Salma Aulia | 25051130014 | Visualization & Reporting Lead |
-| 4 | Nalar Ratih | 25051130016 | Numeric & Validation Lead |
-| 5 | Aista Bening Istiqomah | 25051130018 | Symbolic Lead |
-| 6 | Shelfa Qorianisa Dayani | 25051130020 | Koordinator Proyek |
+| No | Nama | NIM | Peran | Kontribusi |
+|----|------|-----|-------| ---------- |
+| 1 | Elvina Yahya Griselda | 25051130007 | Modeling Lead | Menyusun laporan bagian B. Problem Formulation dan C. Metode Penyelesaian. Membuat kode program bagian A, B, dan C. Solusi Simbolik (SymPy) cell 1. |
+| 2 | Arlina Dewi Kusumawati | 25051130011 | Numeric & Validation Lead | Menyusun laporan bagian E. Hasil dan Validasi. Membuat kode program bagian E. Validasi - Simbolik vs Numerik + Error Analysis.|
+| 3 | Tashfia Eka Salma Aulia | 25051130014 | Visualization & Reporting Lead | Menyusun laporan bagian G. Kesimpulan dan F. Visualisasi dan Interpretasi. Membuat kode program bagian F. Visualisasi Kurva v(t) dan Area per Fase serta membuat G. Interpretasi Hasil dan Kesimpulan. |
+| 4 | Nalar Ratih | 25051130016 | Numeric & Validation Lead | Menyusun laporan bagian C. Solusi Simbolik (SymPy) cell 1 dan E. Hasil dan Validasi. Membuat kode program bagian F. Visualisasi Kurva v(t) dan Area per Fase. |
+| 5 | Aista Bening Istiqomah | 25051130018 | Symbolic Lead | Menyusun laporan bagian D. Metode Penyelesaian. Membuat kode program bagian D. Solusi Numerik (NumPy) - 2 Resolusi Sampling.|
+| 6 | Shelfa Qorianisa Dayani | 25051130020 | Koordinator Proyek | Menyusun laporan bagian A. Tujuan Praktikum dan B. Tabel Kontribusi. Menyusun timeline, memastikan integrasi output dan standar guideline terpenuhi. Membuat kode program bagian C. Solusi Simbolik (SymPy) cell 3. |
+
 
 ---
 
