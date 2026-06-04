@@ -191,3 +191,36 @@
         }
       ]
     },
+    {
+      "cell_type": "code",
+      "source": [
+        "print('=== VERIFIKASI SIMBOLIK (diff dari antiturunan) ===')\n",
+        "# perulangan untuk setiap fase gerakan\n",
+        "for i, (v_sym_i, a, b) in enumerate(\n",
+        "    [(v1_sym, t0, t1), (v2_sym, t1, t2), (v3_sym, t2, t3), (v4_sym, t3, t4)], start=1):\n",
+        "    F = sp.integrate(v_sym_i, t)  # Menghitung antiturunan\n",
+        "    check = sp.simplify(sp.diff(F, t) - v_sym_i)  # Menurunkan kembali hasil integral\n",
+        "    print(f'  Fase {i}: turunan antiturunan - v{i}(t) = {check} --> OK = {check == 0}')"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "VvcfLVjdF71m",
+        "outputId": "c82850e9-8354-4b84-c761-e18e9ab9262b"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "=== VERIFIKASI SIMBOLIK (diff dari antiturunan) ===\n",
+            "  Fase 1: turunan antiturunan - v1(t) = 0  --> OK = True\n",
+            "  Fase 2: turunan antiturunan - v2(t) = 0  --> OK = True\n",
+            "  Fase 3: turunan antiturunan - v3(t) = 0  --> OK = True\n",
+            "  Fase 4: turunan antiturunan - v4(t) = 0  --> OK = True\n"
+          ]
+        }
+      ]
+    },
