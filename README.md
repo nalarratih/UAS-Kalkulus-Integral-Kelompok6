@@ -11,7 +11,7 @@
 
 | No | Nama | NIM | Peran | Kontribusi |
 |----|------|-----|-------| ---------- |
-| 1 | Elvina Yahya Griselda | 25051130007 | Modeling Lead | Menyusun laporan bagian B. Problem Formulation dan C. Metode Penyelesaian. Membuat kode program bagian A, B, dan C. Solusi Simbolik (SymPy) cell 1  |
+| 1 | Elvina Yahya Griselda | 25051130007 | Modeling Lead | Menyusun laporan bagian B. Problem Formulation dan C. Metode Penyelesaian. Membuat kode program bagian A dan B. Solusi Simbolik (SymPy) cell 1  |
 | 2 | Arlina Dewi Kusumawati | 25051130011 | Numeric & Validation Lead | Menyusun laporan bagian E. Hasil dan Validasi. Membuat kode program bagian E. Validasi - Simbolik vs Numerik + Error Analysis.|
 | 3 | Tashfia Eka Salma Aulia | 25051130014 | Visualization & Reporting Lead | Menyusun laporan bagian G. Kesimpulan dan F. Visualisasi dan Interpretasi. Membuat kode program bagian F. Visualisasi Kurva v(t) dan Area per Fase serta membuat G. Interpretasi Hasil dan Kesimpulan. |
 | 4 | Nalar Ratih | 25051130016 | Numeric & Validation Lead | Menyusun laporan bagian C. Solusi Simbolik (SymPy) cell 1 dan E. Hasil dan Validasi. Membuat kode program bagian F. Visualisasi Kurva v(t) dan Area per Fase. |
